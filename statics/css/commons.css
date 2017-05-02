@@ -1,0 +1,107 @@
+img {
+    border: 0;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.shade {
+    position: fixed;
+    z-index: 1040;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #999;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+}
+
+.loading {
+    position: fixed;
+    z-index: 1060;
+    top: 40%;
+    left: 50%;
+    height: 32px;
+    width: 32px;
+    margin: 0 0 0 -16px;
+    background: url(/static/imgs/loading.gif);
+}
+
+.modal-delete {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    margin-left: -270px;
+    width: 540px;
+    height: 146px;
+    z-index: 1070;
+}
+
+.no-radius {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    -o-border-radius: 0 !important;
+    border-radius: 0 !important;
+    -webkit-appearance: none;
+
+}
+
+/*  列表功能开始 */
+.list-block {
+
+}
+
+.list-block .search-area {
+    border: 1px solid #ddd;
+    border-bottom: 0;
+    position: relative;
+    padding-top: 1px;
+}
+
+.list-block .search-area .do-submit {
+    position: absolute;
+    height: 34px;
+    bottom: 1px;
+}
+
+.list-block .search-area .condition {
+    position: relative;
+    height: 35px;
+}
+
+.list-block .search-area .condition .icons {
+    position: absolute;
+    left: 0;
+}
+
+.list-block .search-area .condition .inputs {
+    position: absolute;
+    left: 37px;
+    right: 0;
+}
+
+.list-block .function-area {
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.list-block .function-area .custom-btn-group .btn {
+    border-bottom: 0;
+    border-top: 0;
+    padding: 6px 10px;
+}
+
+.list-block .function-area-simple {
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    padding: 10px;
+}
+/*  列表功能结束 */

@@ -69,7 +69,7 @@ class Asset(models.Model):
     idc = models.ForeignKey('IDC', verbose_name='IDC机房', null=True, blank=True, default=None)
     business_unit = models.ForeignKey('BusinessUnit', verbose_name='属于的业务线', null=True, blank=True, default=None)
 
-    tag = models.ManyToManyField('Tag')
+    tag = models.ManyToManyField('Tag', null=True,blank=True)
 
     latest_date = models.DateField(verbose_name="最后更新时间", null=True, blank=True)
     create_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)

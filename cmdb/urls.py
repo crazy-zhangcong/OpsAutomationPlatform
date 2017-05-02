@@ -21,6 +21,7 @@ from cmdb import views
 urlpatterns = [
 
     url(r'index.html', views.index),
+    url(r'asset.html', views.asset),
     url(r'', views.index),
 
 ]

@@ -16,17 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from index import views as index_views
+from cmdb import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
 
-    url(r'^login/', index_views.login),
-    url(r'^logout/', index_views.logout),
-
-
-    url(r'^cmdb/', include('cmdb.urls')),
-
-    url(r'^$', index_views.index_func),
+    url(r'index.html', views.index),
+    url(r'', views.index),
 
 ]

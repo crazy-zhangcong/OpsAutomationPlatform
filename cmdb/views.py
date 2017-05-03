@@ -15,6 +15,22 @@ def index(request):
 
 @is_login
 def asset(request):
+    if "type" in request.GET:
+        from cmdb.views_func import asset
+        asset_id = request.GET.get('id')
+        if request.GET.get('type') == "select":     # 查看资产详情
+            asset.SelectAsset(request, asset_id)
+
+            return render(request, 'cmdb/asset_select.html')
+
+        elif request.GET.get('type') == "edit":     # 编辑资产
+            pass
+
+        elif request.GET.get('type') == "create":   # 创建
+            pass
+
+        elif request.GET.get('type') == "delete":   # 删除资产
+            pass
 
     cmdb_models_obj = cmdb_models.Asset.objects.all()
 

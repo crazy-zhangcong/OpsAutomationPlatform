@@ -1,0 +1,1220 @@
+{% extends "cmdb/include/page_temp.html" %}
+{% load cmdb_asset %}
+
+{% block css %}
+    <style>
+        .dotted {
+            border-top: 1px dotted #ddd;
+        }
+
+        .text-left {
+            text-align: left !important;
+        }
+    </style>
+
+    <style>
+        .guige {
+
+        }
+
+        .guige-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .guige-table .title {
+            background: #f5fafe;
+            text-align: left;
+            font-weight: bold;
+            line-height: 32px;
+            height: 32px;
+            font-family: "微软雅黑";
+            border-right: 1px solid #dcdcdc;
+            border-left: 2px solid #0488cd;
+        }
+
+        .guige-table td, .content .guige-table th {
+            border: 1px solid #dcdcdc;
+            line-height: 30px;
+            height: 30px;
+            padding: 0 10px;
+            border-top: 0;
+        }
+
+        .guige-table .body-left {
+            width: 126px;
+            font-weight: normal;
+            text-align: right;
+            color: #666;
+        }
+
+        .guige-table .body-right {
+            color: #333;
+        }
+
+    </style>
+    <style>
+        .handle_log {
+            font-size: 13px !important;
+            font-family: Tahoma, Geneva, Helvetica, sans-serif !important;
+        }
+
+        .time {
+            padding: 10px;
+            border: 1px solid #ddd;
+            position: absolute;
+            width: 150px;
+            left: -190px;
+            box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.12);
+        }
+
+        .record {
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 17px;
+            min-height: 40px;
+            box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.12);
+        }
+
+        .record .auther {
+            text-align: right;
+            padding: 5px 0px;
+            color: #9E9C9C;
+        }
+
+        .record-arrow {
+            position: absolute;
+            width: 24px;
+            height: 14px;
+            background: url(/static/imgs/bg_dot_left3.png) no-repeat;
+            top: 15px;
+            left: -6px;
+            text-indent: -9999em;
+        }
+
+        .tag {
+            padding: 6px;
+            background-color: #00a2ca;
+            margin: 10px;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .add-tag {
+            margin: 10px;
+            color: #00a2ca;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block page-wrapper %}
+    <div id="page-wrapper">
+        <div id="breadcrumb" style="margin-bottom: 0">
+            <ul class="breadcrumb">
+                    <li>
+                        <a href="/cmdb/">首页</a>
+
+                    </li>
+                    <li><a href="/cmdb/asset.html">资产管理</a></li>
+                    <li class="active">查看资产详情</li>
+                </ul>
+        </div>
+
+        <div style="padding: 5px 8px;">
+
+            <div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a class="no-radius" href="#basic" aria-controls="basic" role="tab" data-toggle="tab">基本信息</a></li>
+                    <li role="presentation"><a class="no-radius" href="#hardware" aria-controls="hardware" role="tab" data-toggle="tab">硬件信息</a></li>
+                    <li role="presentation"><a class="no-radius" href="#log" aria-controls="log" role="tab" data-toggle="tab">变更记录</a></li>
+
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="basic">
+
+                        <div class="form-horizontal clearfix" style="margin-top:20px;">
+
+                            <div class="form-group col-md-6">
+                                <div class="col-md-4 control-label">主机名：</div>
+                                <div class="col-md-7 control-label text-left">web-01_zw_119.90.40.16</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="col-md-4 control-label">管理IP：</div>
+                                <div class="col-md-7 control-label text-left">None</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="col-md-4 control-label">序列号：</div>
+                                <div class="col-md-7 control-label text-left">16GQZ42</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="col-md-4 control-label">状态：</div>
+                                <div class="col-md-7 control-label text-left">2</div>
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <div class="col-md-4 control-label">更新时间</div>
+                                <div class="col-md-7 control-label text-left">2017-03-16</div>
+                            </div>
+
+                            <div class="dotted  col-md-12"></div>
+
+                            <div class="form-group col-md-6">
+                                <div class="col-md-4 control-label">机房：</div>
+                                <div class="col-md-7 control-label text-left">兆维</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="col-md-4 control-label">楼层：</div>
+                                <div class="col-md-7 control-label text-left">4</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="col-md-4 control-label">机柜：</div>
+                                <div class="col-md-7 control-label text-left">b21</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="col-md-4 control-label">柜上位置：</div>
+                                <div class="col-md-7 control-label text-left"></div>
+                            </div>
+
+                            <div class="dotted col-md-12"></div>
+
+                            <div class="form-group col-md-6">
+                                <div class="col-md-4 control-label">业务线：</div>
+                                <div class="col-md-7 control-label text-left">新闻稿</div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group col-md-6">
+                                    <div class="col-md-4 control-label">业务联系人：</div>
+                                    <div class="col-md-8 control-label text-left">
+                                            <div>
+                                                <p>张聪</p>
+                                                <div style="margin-left: 20px;">
+                                                    <p>邮箱：zc_92@sina.com</p>
+                                                    <p>手机：18511123018</p>
+                                                    <p>座机：</p>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="hardware">
+
+
+                        <div class="guige">
+                            <table class="guige-table">
+                                <tbody>
+
+                                <tr>
+                                    <th colspan="5" class="title f14 th"><span class="padding-l-8">基础信息</span></th>
+                                </tr>
+                                <tr>
+                                    <td>名称</td>
+                                    <td colspan="4">值</td>
+                                </tr>
+                                <tr>
+                                    <td>操作系统</td>
+                                    <td colspan="4">Linux</td>
+                                </tr>
+                                <tr>
+                                    <td>系统版本</td>
+                                    <td colspan="4">CentOS release 6.7 (Final)</td>
+                                </tr>
+                                <tr>
+                                    <td>主板序列号</td>
+                                    <td colspan="4">16GQZ42</td>
+                                </tr>
+                                <tr>
+                                    <td>主板型号</td>
+                                    <td colspan="4">PowerEdge R630</td>
+                                </tr>
+                                <tr>
+                                    <td>主板厂商</td>
+                                    <td colspan="4">Dell Inc.</td>
+                                </tr>
+                                <tr>
+                                    <td>CPU逻辑核数</td>
+                                    <td colspan="4">24</td>
+                                </tr>
+                                <tr>
+                                    <td>CPU物理核数</td>
+                                    <td colspan="4">2</td>
+                                </tr>
+                                <tr>
+                                    <td>CPU型号</td>
+                                    <td colspan="4"> Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz</td>
+                                </tr>
+
+
+                                <!-- 网卡信息开始 -->
+                                <tr>
+                                    <th colspan="5" class="title f14 th"><span class="padding-l-8">网卡信息</span></th>
+                                </tr>
+                                <tr>
+                                    <td>名称</td>
+                                    <td>MAC地址</td>
+                                    <td>IP地址</td>
+                                    <td>掩码</td>
+                                    <td>UP</td>
+                                </tr>
+
+                                <tr>
+                                    <td>em4</td>
+                                    <td>44:a8:42:03:a2:35</td>
+                                    <td>192.168.20.10</td>
+                                    <td>255.255.255.0</td>
+                                    <td>True</td>
+                                </tr>
+
+                                <tr>
+                                    <td>em3</td>
+                                    <td>44:a8:42:03:a2:34</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>False</td>
+                                </tr>
+
+                                <tr>
+                                    <td>em1</td>
+                                    <td>44:a8:42:03:a2:32</td>
+                                    <td>119.90.40.16</td>
+                                    <td>255.255.255.0</td>
+                                    <td>True</td>
+                                </tr>
+
+                                <tr>
+                                    <td>em2</td>
+                                    <td>44:a8:42:03:a2:33</td>
+                                    <td>192.168.10.10</td>
+                                    <td>255.255.255.0</td>
+                                    <td>True</td>
+                                </tr>
+
+                                <!-- 网卡信息结束 -->
+
+                                <!-- 硬盘信息开始 -->
+                                <tr>
+                                    <th colspan="5" class="title f14" style="border-left:2px solid #0488cd;">
+                                        <span class="padding-l-8">硬盘信息</span>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>插槽</td>
+                                    <td>容量</td>
+                                    <td>接口类型</td>
+                                    <td colspan="2">型号</td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>0</td>
+                                    <td>111.79</td>
+                                    <td>SATA</td>
+                                    <td colspan="2">PHWL506501E6120LGNINTEL SSDSC2BB120G4R                    D201DL13</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>1</td>
+                                    <td>111.79</td>
+                                    <td>SATA</td>
+                                    <td colspan="2">PHWL506502BR120LGNINTEL SSDSC2BB120G4R                    D201DL13</td>
+
+                                </tr>
+
+                                <!-- 硬盘信息结束 -->
+
+                                <!-- 内存信息开始 -->
+                                <tr>
+                                    <th colspan="5" class="title f14" style="border-left:2px solid #0488cd;">
+                                        <span class="padding-l-8">内存信息</span>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>插槽</td>
+                                    <td>容量</td>
+                                    <td>频率</td>
+                                    <td colspan="2">型号</td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>B5</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>B12</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>A6</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>A4</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>A8</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>A1</td>
+                                    <td>16384.0</td>
+                                    <td>2133 MHz</td>
+                                    <td colspan="2">DDR4</td>
+                                </tr>
+
+                                <tr>
+                                    <td>A12</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>B8</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>A3</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>B6</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>B7</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>A5</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>A2</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>B3</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>A10</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>B2</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>B4</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>A11</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>A7</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>B1</td>
+                                    <td>16384.0</td>
+                                    <td>2133 MHz</td>
+                                    <td colspan="2">DDR4</td>
+                                </tr>
+
+                                <tr>
+                                    <td>B10</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>B9</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>B11</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <tr>
+                                    <td>A9</td>
+                                    <td>0.0</td>
+                                    <td>Unknown</td>
+                                    <td colspan="2">Unknown</td>
+                                </tr>
+
+                                <!-- 内存信息结束 -->
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="log">
+
+                        <div class="clearfix handle_log">
+                            <div class="left clearfix" style="border-left:2px dashed #ddd;width:70%; margin-left: 220px;">
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:54</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        资产汇报
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:54</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为B5;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为B12;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为A6;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为A4;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为A8;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为A1;容量为16384;类型为DDR4;速度为2133 MHz;厂商为00CE00B300CE;SN号为4119BEAC
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为A12;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为B8;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为A3;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为B6;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为B7;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为A5;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为A2;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为B3;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为A10;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为B2;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为B4;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为A11;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为A7;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为B1;容量为16384;类型为DDR4;速度为2133 MHz;厂商为00CE00B300CE;SN号为4120494F
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为B10;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为B9;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为B11;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增内存]插槽为A9;容量为0;类型为Unknown;速度为Unknown;厂商为Not Specified;SN号为Not Specified
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增硬盘]插槽为0;容量为111.790;硬盘类型为SATA;型号为PHWL506501E6120LGNINTEL SSDSC2BB120G4R                    D201DL13
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增硬盘]插槽为1;容量为111.790;硬盘类型为SATA;型号为PHWL506502BR120LGNINTEL SSDSC2BB120G4R                    D201DL13
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增网卡]em4:mac地址为44:a8:42:03:a2:35;状态为True;掩码为255.255.255.0;IP地址为192.168.20.10
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增网卡]em3:mac地址为44:a8:42:03:a2:34;状态为False;掩码为;IP地址为
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增网卡]em1:mac地址为44:a8:42:03:a2:32;状态为True;掩码为255.255.255.0;IP地址为119.90.40.16
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:50:55</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [新增网卡]em2:mac地址为44:a8:42:03:a2:33;状态为True;掩码为255.255.255.0;IP地址为192.168.10.10
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:51:49</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        资产汇报
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:51:49</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [更新硬盘]插槽为0:型号由PHWL506501E6120LGNINTEL SSDSC2BB120G4R                    D201DL变更为PHWL506501E6120LGNINTEL SSDSC2BB120G4R                    D201DL13
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:51:49</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [更新硬盘]插槽为1:型号由PHWL506502BR120LGNINTEL SSDSC2BB120G4R                    D201DL变更为PHWL506502BR120LGNINTEL SSDSC2BB120G4R                    D201DL13
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:53:48</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        资产汇报
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:53:49</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [更新硬盘]插槽为0:型号由PHWL506501E6120LGNINTEL SSDSC2BB120G4R                    D201DL变更为PHWL506501E6120LGNINTEL SSDSC2BB120G4R                    D201DL13
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 11:53:49</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [更新硬盘]插槽为1:型号由PHWL506502BR120LGNINTEL SSDSC2BB120G4R                    D201DL变更为PHWL506502BR120LGNINTEL SSDSC2BB120G4R                    D201DL13
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 16:33:41</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [更新硬盘]插槽为0:型号由PHWL506501E6120LGNINTEL SSDSC2BB120G4R                    D201DL变更为PHWL506501E6120LGNINTEL SSDSC2BB120G4R                    D201DL13
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 16:33:41</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [更新硬盘]插槽为1:型号由PHWL506502BR120LGNINTEL SSDSC2BB120G4R                    D201DL变更为PHWL506502BR120LGNINTEL SSDSC2BB120G4R                    D201DL13
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 16:33:42</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        资产汇报
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 16:42:34</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [更新硬盘]插槽为0:型号由PHWL506501E6120LGNINTEL SSDSC2BB120G4R                    D201DL变更为PHWL506501E6120LGNINTEL SSDSC2BB120G4R                    D201DL13
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 16:42:34</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [更新硬盘]插槽为1:型号由PHWL506502BR120LGNINTEL SSDSC2BB120G4R                    D201DL变更为PHWL506502BR120LGNINTEL SSDSC2BB120G4R                    D201DL13
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 16:42:34</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        资产汇报
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 17:02:42</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        资产汇报
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 17:02:42</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [更新硬盘]插槽为0:型号由PHWL506501E6120LGNINTEL SSDSC2BB120G4R                    D201DL变更为PHWL506501E6120LGNINTEL SSDSC2BB120G4R                    D201DL13
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 17:02:42</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        [更新硬盘]插槽为1:型号由PHWL506502BR120LGNINTEL SSDSC2BB120G4R                    D201DL变更为PHWL506502BR120LGNINTEL SSDSC2BB120G4R                    D201DL13
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-13 17:03:30</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        资产汇报
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="position:relative;">
+                                    <div class="time">2017-03-16 09:58:49</div>
+                                    <div class="record-arrow"></div>
+                                    <div class="record">
+                                        资产汇报
+                                        <div class="auther">
+                                            <span><i class="fa fa-user"></i></span>
+
+                                            <span>自动采集</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

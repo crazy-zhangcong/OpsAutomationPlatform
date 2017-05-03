@@ -3,23 +3,19 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
-body {
-  background-color: #f8f8f8;
-}
+
 #wrapper {
   width: 100%;
 }
 #page-wrapper {
-  padding: 0 15px;
   min-height: 568px;
   background-color: white;
 }
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
-    margin: 0 0 0 130px;
-    padding: 0 10px;
-    border-left: 1px solid #e7e7e7;
+    margin: 5px 0 0 135px;
+    border: 1px solid #e7e7e7;
   }
 }
 .navbar-top-links {
@@ -184,22 +180,22 @@ table.dataTable thead .sorting_asc_disabled,
 table.dataTable thead .sorting_desc_disabled {
   background: transparent;
 }
-table.dataTable thead .sorting_asc:after {
-  content: "\f0de";
-  float: right;
-  font-family: fontawesome;
-}
-table.dataTable thead .sorting_desc:after {
-  content: "\f0dd";
-  float: right;
-  font-family: fontawesome;
-}
-table.dataTable thead .sorting:after {
-  content: "\f0dc";
-  float: right;
-  font-family: fontawesome;
-  color: rgba(50, 50, 50, 0.5);
-}
+/*table.dataTable thead .sorting_asc:after {*/
+  /*content: "\f0de";*/
+  /*float: right;*/
+  /*font-family: fontawesome;*/
+/*}*/
+/*table.dataTable thead .sorting_desc:after {*/
+  /*content: "\f0dd";*/
+  /*float: right;*/
+  /*font-family: fontawesome;*/
+/*}*/
+/*table.dataTable thead .sorting:after {*/
+  /*content: "\f0dc";*/
+  /*float: right;*/
+  /*font-family: fontawesome;*/
+  /*color: rgba(50, 50, 50, 0.5);*/
+/*}*/
 .btn-circle {
   width: 30px;
   height: 30px;

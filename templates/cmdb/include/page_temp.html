@@ -15,14 +15,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="/statics/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="/statics/plugins/sb-admin/css/metisMenu.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="/statics/plugins/sb-admin/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="/statics/plugins/sb-admin/css/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/statics/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -33,6 +27,21 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style>
+        .pg-body .content {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 205px;
+            border: 1px solid #dddddd;
+            overflow: scroll;
+        }
+    </style>
+
+    {% block css %}
+    {% endblock %}
 
 </head>
 

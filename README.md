@@ -71,4 +71,10 @@ OpsAutomationPlatform/      # 程序主目录
 
 #### 页面展示
 - 登录页
-![](https://github.com/crazy-zhangcong/OpsAutomationPlatform)
+![](https://github.com/crazy-zhangcong/OpsAutomationPlatform/images/login.png)
+
+- 运维平台首页
+![](https://github.com/crazy-zhangcong/OpsAutomationPlatform/images/index.png)
+
+- 资产管理-资产展示页面
+![](https://github.com/crazy-zhangcong/OpsAutomationPlatform/images/cmdb_asset.png)

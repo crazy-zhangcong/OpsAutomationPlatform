@@ -25,7 +25,7 @@ SECRET_KEY = 'sf+-30(rfkznp=bs=mb$4x7ycbhs7g0yxoq)8_s+=g@wisp4p9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

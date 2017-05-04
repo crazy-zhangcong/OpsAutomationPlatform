@@ -1,14 +1,6 @@
 # 运维自动化平台
 
-
-## 测试地址
-```python
-http://111.204.117.100:9999/
-账号: zhangcong
-密码: zhangcong
-```
-
-## 部分目录结构说明
+#### 部分目录结构说明
 ```python
 OpsAutomationPlatform/      # 程序主目录
 ├── cmdb                        # 资产管理
@@ -76,3 +68,7 @@ OpsAutomationPlatform/      # 程序主目录
         └── login.html
 
 ```
+
+#### 页面展示
+- 登录页
+![](https://github.com/crazy-zhangcong/OpsAutomationPlatform)

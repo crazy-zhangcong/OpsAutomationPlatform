@@ -6,8 +6,8 @@ class BusinessUnit(models.Model):
     业务线
     """
     name = models.CharField('业务线', max_length=64, unique=True)
-    contact = models.CharField('业务联系人ID', max_length=64)
-    manager = models.CharField('系统管理员ID', max_length=64)
+    contact = models.CharField('业务管理-组ID', max_length=64)
+    manager = models.CharField('系统管理-组ID', max_length=64)
 
     class Meta:
         verbose_name_plural = "业务线表"
@@ -35,6 +35,7 @@ class Tag(models.Model):
     资产标签
     """
     name = models.CharField('标签', max_length=32, unique=True)
+    server_obj = models.ForeignKey('Asset', related_name='tag', null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "标签表"
@@ -69,8 +70,6 @@ class Asset(models.Model):
     idc = models.ForeignKey('IDC', verbose_name='IDC机房', null=True, blank=True, default=None)
     business_unit = models.ForeignKey('BusinessUnit', verbose_name='属于的业务线', null=True, blank=True, default=None)
 
-    tag = models.ManyToManyField('Tag', null=True,blank=True)
-
     latest_date = models.DateField(verbose_name="最后更新时间", null=True, blank=True)
     create_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
@@ -88,16 +87,16 @@ class Server(models.Model):
     asset = models.OneToOneField('Asset')
 
     hostname = models.CharField(max_length=128, unique=True)
-    sn = models.CharField('SN号', max_length=64, db_index=True, null=True, blank=True)
-    manufacturer = models.CharField(verbose_name='制造商', max_length=64, null=True, blank=True)
-    model = models.CharField('型号', max_length=64, null=True, blank=True)
+    sn = models.CharField('主板SN号', max_length=64, db_index=True, null=True, blank=True)
+    manufacturer = models.CharField(verbose_name='主板厂商', max_length=64, null=True, blank=True)
+    model = models.CharField('主机型号', max_length=64, null=True, blank=True)
 
     manage_ip = models.GenericIPAddressField('管理IP', null=True, blank=True)
 
-    os_platform = models.CharField('系统', max_length=64, null=True, blank=True)
-    os_version = models.CharField('系统版本', max_length=64, null=True, blank=True)
+    os_platform = models.CharField('操作系统', max_length=64, null=True, blank=True)
+    os_version = models.CharField('操作系统版本', max_length=64, null=True, blank=True)
 
-    cpu_count = models.IntegerField('CPU个数', null=True, blank=True)
+    cpu_count = models.IntegerField('CPU核数', null=True, blank=True)
     cpu_physical_count = models.IntegerField('CPU物理个数', null=True, blank=True)
     cpu_model = models.CharField('CPU型号', max_length=128, null=True, blank=True)
 

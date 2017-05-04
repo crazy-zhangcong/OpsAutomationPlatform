@@ -19,9 +19,9 @@ def asset(request):
         from cmdb.views_func import asset
         asset_id = request.GET.get('id')
         if request.GET.get('type') == "select":     # 查看资产详情
-            asset.SelectAsset(request, asset_id)
+            result_data = asset.SelectAsset(asset_id)
 
-            return render(request, 'cmdb/asset_select.html')
+            return render(request, 'cmdb/asset_select.html', locals())
 
         elif request.GET.get('type') == "edit":     # 编辑资产
             pass

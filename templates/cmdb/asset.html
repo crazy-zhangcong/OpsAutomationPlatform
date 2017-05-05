@@ -55,7 +55,7 @@
                             <tbody>
                                 {% for obj in cmdb_models_obj %}
                                     <tr>
-                                        <td nid="{{ obj.id }}"><input type="checkbox" /></td>
+                                        <td nid="{{ obj.id }}"><input onclick="CheckboxFcun(this)"  type="checkbox" /></td>
                                         <td>{{ forloop.counter }}</td>
                                         <td>{% display_asset_type_name obj %}</td>
                                         <td>{{ obj.server.hostname }}</td>
@@ -138,13 +138,16 @@
 
         // 点击表格行选中第一列复选框
         $("#table_id_example tbody tr").click(function () {
+            console.log($(this).find('input[type=checkbox]').prop("checked"));
 
-            var input_status = $(this).children('td').children('input').prop("checked");
+
+            var input_status = $(this).find('input').prop("checked");
+            console.log(input_status)
 
             if (input_status){
-                $(this).children('td').children('input').prop("checked", false);
+                $(this).find('input').prop("checked", false);
             }else{
-                $(this).children('td').children('input').prop("checked", true);
+                $(this).find('input').prop("checked", true);
             }
         })
     });
@@ -164,6 +167,15 @@
                 $(this).prop("checked", true);
             }
         })
+    }
+
+    function CheckboxFcun(obj) {
+        // 当行首的 checkbox 被单机时触发
+        if(checked_status){
+            $(obj).prop("checked", false);
+        }else{
+            $(obj).prop("checked", true);
+        }
     }
 
     </script>

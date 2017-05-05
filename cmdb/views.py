@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
 
 from index.views import is_login
 from cmdb import models as cmdb_models
+
+from cmdb.forms import form_asset
 
 
 @is_login
@@ -27,7 +29,19 @@ def asset(request):
             pass
 
         elif request.GET.get('type') == "create":   # 创建
-            pass
+            if request.method == "GET":
+                obj = form_asset.AddAssetForm()
+                return render(request, 'cmdb/asset_create.html', {'obj': obj})
+            elif request.method == "POST":
+                obj = form_asset.AddAssetForm(request.POST)
+
+                if obj.is_valid():
+                    obj = asset.CreateAsset(obj)
+                    print(obj.errors)
+                    if not obj.errors:
+                        return redirect('/cmdb/asset.html')
+
+                return render(request, 'cmdb/asset_create.html', {'obj': obj})
 
         elif request.GET.get('type') == "delete":   # 删除资产
             pass

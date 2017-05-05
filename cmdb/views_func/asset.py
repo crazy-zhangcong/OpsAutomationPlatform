@@ -6,10 +6,28 @@
 from cmdb import models
 from index import models as index_models
 
+from cmdb.forms import form_asset
 
-def CreateAsset():
-    pass
 
+def CreateAsset(obj):
+
+    hostname = obj.cleaned_data.pop('hostname')
+    Server_obj = models.Server.objects.filter(hostname=hostname)
+
+    if Server_obj:  # 判断主机名是否存在
+        # 主机名已经存在
+        obj.errors['hostname'] = ["主机名已存在"]
+    else:
+        tag_list = obj.cleaned_data.pop('tag')
+
+        Asset_obj = models.Asset.objects.create(**obj.cleaned_data)
+
+        models.Server.objects.create(hostname=hostname, asset_id=Asset_obj.id)
+
+        if tag_list:
+            tag_obj = models.Tag.objects.filter(id__in=tag_list)
+            Asset_obj.tag.add(*tag_obj)
+    return obj
 
 def DeleteAsset(asset_id):
     pass
@@ -83,7 +101,6 @@ def get_contact_information(obj):
             'phone': i.phone,
         }
         manager_data.append(manager_info)
-    print(contact_data, manager_data)
     return contact_data, manager_data
 
 

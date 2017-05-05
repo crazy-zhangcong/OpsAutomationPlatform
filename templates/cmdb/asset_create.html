@@ -1,0 +1,115 @@
+{% extends "cmdb/include/page_temp.html" %}
+{% load cmdb_asset %}
+
+{% block css %}
+    <style>
+        select {
+            height: 30px;
+        }
+        .error-p{
+            padding-top: 5px;
+            color: red;
+            text-align: left;
+            padding-left: 5px;
+            float: left;
+        }
+        #id_tag li{
+            list-style: none;
+        }
+    </style>
+
+{% endblock %}
+
+{% block page-wrapper %}
+    <div id="page-wrapper">
+        <div id="breadcrumb" style="margin-bottom: 0">
+            <ul class="breadcrumb">
+                    <li>
+                        <a href="/cmdb/">首页</a>
+
+                    </li>
+                    <li><a href="/cmdb/asset.html">资产管理</a></li>
+                    <li class="active">添加资产</li>
+                </ul>
+        </div>
+
+        <div style="padding: 5px 8px;">
+            <form class="form-horizontal" method="post" action="#" novalidate="novalidate">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_device_type_id" class="col-sm-2 control-label">资产类型: </label>
+                    <div class="col-sm-2">
+                        {{ obj.device_type_id }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_device_status_id" class="col-sm-2 control-label">资产状态: </label>
+                    <div class="col-sm-2">
+                        {{ obj.device_status_id }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_hostname" class="col-sm-2 control-label">主机名: </label>
+                    <div class="col-sm-3">
+                        {{ obj.hostname }}
+                    </div>
+                    {% if obj.errors.hostname.0 %}
+                        <p class="error-p">{{ obj.errors.hostname.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_idc" class="col-sm-2 control-label">IDC机房: </label>
+                    <div class="col-sm-2">
+                        {{ obj.idc_id }}
+                    </div>
+                    {% if obj.errors.idc_id.0 %}
+                        <p class="error-p">{{ obj.errors.idc_id.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_cabinet_num" class="col-sm-2 control-label">机柜号: </label>
+                    <div class="col-sm-3">
+                        {{ obj.cabinet_num }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_cabinet_order" class="col-sm-2 control-label">机柜中序号: </label>
+                    <div class="col-sm-3">
+                        {{ obj.cabinet_order }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_business_unit" class="col-sm-2 control-label">业务线: </label>
+                    <div class="col-sm-2">
+                        {{ obj.business_unit_id }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_tag" class="col-sm-2 control-label">标签: </label>
+                    <div class="col-sm-2" style="margin-top: 5px;">
+                        {{ obj.tag }}
+                    </div>
+                    {% if obj.errors.tag.0 %}
+                        <p class="error-p">{{ obj.errors.tag.0 }}</p>
+                    {% endif %}
+                </div>
+                <div class="form-group" style="margin-left: 130px;">
+                    <button type="submit" class="btn btn-success" >添加</button>
+                    <button type="button" class="btn btn-info" onclick="window.history.back(-1)">返回</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

@@ -41,7 +41,7 @@ def display_asset_status_name(line_obj):
 def display_asset_tags_name(line_obj):
     tags_obj = line_obj.tag.all()
 
-    tag_names = None
+    tag_names = ""
     for obj in tags_obj:
         if tag_names:
             tag_names += ",%s" % obj.name

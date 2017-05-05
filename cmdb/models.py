@@ -35,7 +35,7 @@ class Tag(models.Model):
     资产标签
     """
     name = models.CharField('标签', max_length=32, unique=True)
-    server_obj = models.ForeignKey('Asset', related_name='tag', null=True, blank=True)
+    server_obj = models.ManyToManyField('Asset', related_name='tag')
 
     class Meta:
         verbose_name_plural = "标签表"
